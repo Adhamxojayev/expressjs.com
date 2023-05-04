@@ -1,14 +1,14 @@
 ---
 layout: page
-title: Express error handling
+title: Expressda Xatoliklar bilan ishlash
 menu: guide
 lang: uz
 ---
 
-# Error handling
+# Xato bilan ishlash
 
-Define error-handling middleware like other middleware,
-except with four arguments instead of three, specifically with the signature
+xatoliklar bilan ishlash uchun Expressda o'rta dasturlar bir oz farq qiladi
+argumentlar uchta emas torta bo'ladi
 `(err, req, res, next)`):
 
 <pre><code class="language-javascript" translate="no">
@@ -18,8 +18,8 @@ app.use(function(err, req, res, next){
 });
 </code></pre>
 
-You define error-handling middleware last, after other `app.use()` and routes calls;
-For example:
+Xatoliklar bilan ishlaydigan o'rta dasturlar `app.use()` va marshrut qo'ng'iroqlaridan so'ng yoziladi;
+Masalan:
 
 <pre><code class="language-javascript" translate="no">
 var bodyParser = require('body-parser');
@@ -32,14 +32,9 @@ app.use(function(err, req, res, next){
 });
 </code></pre>
 
-Responses from within the middleware are completely arbitrary. You may
-wish to respond with an HTML error page, a simple message, a JSON string,
-or anything else you prefer.
+O‘rta dastur ichidagi javoblarni o‘zingiz istagingiz bo‘yicha yozishingiz mumkin. Siz HTML xato sahifasi, oddiy xabar, JSON yoki o‘zingiz yoqtirgan boshqa narsalar bilan javob berishingiz mumkin.
 
-For organizational (and higher-level framework) purposes, you may define
-several error-handling middleware, much like you would with
-regular middleware. For example suppose you wanted to define an error-handler
-for requests made via XHR, and those without, you might do:
+Tashkiliy (va yuqori darajadagi tizim) maqsadlar uchun siz oddiy o‘rta dastur bilan bo‘lgani kabi, xatolarni qayta ishlash uchun bir nechta o‘rta dasturlarni belgilashingiz mumkin. Misol uchun, siz XHR orqali qilingan so‘rovlar uchun xato ishlov beruvchini aniqlamoqchi bo‘lsangiz, va ularsiz so‘rovlar uchun siz quyidagicha qilishingiz mumkin:
 
 <pre><code class="language-javascript" translate="no">
 var bodyParser = require('body-parser');
@@ -52,8 +47,8 @@ app.use(clientErrorHandler);
 app.use(errorHandler);
 </code></pre>
 
-Where the more generic `logErrors` may write request and
-error information to stderr, loggly, or similar services:
+Umumiy `logErrors` stderr, loggly yoki shunga o'xshash xizmatlarga 
+so'rov va xato ma'lumotlarini yozishi mumkin bo'lgan hollarda:
 
 <pre><code class="language-javascript" translate="no">
 function logErrors(err, req, res, next) {
@@ -62,8 +57,8 @@ function logErrors(err, req, res, next) {
 }
 </code></pre>
 
-Where `clientErrorHandler` is defined as the following (note
-that the error is explicitly passed along to the next):
+Bu erda `clientErrorHandler` quyidagicha ta'riflangan (xato 
+aniq keyingisiga uzatilganligiga e'tibor bering):
 
 <pre><code class="language-javascript" translate="no">
 function clientErrorHandler(err, req, res, next) {
@@ -75,7 +70,7 @@ function clientErrorHandler(err, req, res, next) {
 }
 </code></pre>
 
-The following `errorHandler` "catch-all" implementation may be defined as:
+Quyidagi `errorHandler` "hammasini ushlab qolish" quyidagicha amalga oshirish mumkin:
 
 <pre><code class="language-javascript" translate="no">
 function errorHandler(err, req, res, next) {
